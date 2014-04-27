@@ -1,0 +1,71 @@
+package cart;
+
+import java.io.IOException;
+
+import cartp.CartesianProduct;
+import cartp.CartesianProduct.CartesianInputFormat;
+
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.JobClient;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.MapReduceBase;
+import org.apache.hadoop.mapred.Mapper;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapred.RunningJob;
+import org.apache.hadoop.mapred.TextInputFormat;
+import org.apache.hadoop.mapred.TextOutputFormat;
+
+public class CartesianProductTest {
+	
+	String in;
+	Path out;
+	
+	public CartesianProductTest(String pathIn, String pathOut){
+		
+		this.in = pathIn;
+		this.out = new Path(pathOut);
+	}
+
+	public void run() throws IOException,InterruptedException {
+
+		JobConf job = new JobConf("Cartesian Product");
+		job.setJarByClass(CartesianProduct.class);
+
+		job.setMapperClass(CartesianMapper.class);
+
+		job.setNumReduceTasks(0);
+
+		job.setInputFormat(CartesianInputFormat.class);
+		
+		out.getFileSystem(job).delete(out, true);
+		
+		CartesianInputFormat.setLeftInputInfo(job, TextInputFormat.class, in);		
+		CartesianInputFormat.setRightInputInfo(job, TextInputFormat.class, in);
+
+		TextOutputFormat.setOutputPath(job, out);
+
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(Text.class);
+
+		RunningJob jerb = JobClient.runJob(job);
+		while (!jerb.isComplete()) {
+			Thread.sleep(1000);
+		}
+				
+		jerb.waitForCompletion();
+		
+		//System.exit(jerb.isSuccessful() ? 0 : 2);
+	}
+
+	public static class CartesianMapper extends MapReduceBase implements Mapper<Text, Text, Text, Text> {
+
+		@Override
+		public void map(Text arg0, Text arg1, OutputCollector<Text, Text> arg2, Reporter arg3) throws IOException {
+			
+			arg2.collect(arg0, arg1);
+			//System.out.println(arg0 + "\t" + arg1);
+		}
+	}
+}

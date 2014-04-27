@@ -1,0 +1,47 @@
+package crr;
+        
+import org.apache.hadoop.fs.Path;
+        
+public class DataPreprocessor{
+	
+	Path in;
+	Path out;
+	
+	public DataPreprocessor(String pathIn, String pathOut){
+		
+		this.in = new Path(pathIn);
+		this.out = new Path(pathOut);
+	}
+	
+
+	public void run() throws Exception {
+			 
+		String regex = "^[>].*";
+		 
+		Configuration conf = new Configuration();
+		conf.set("record.delimiter.regex", regex);
+		    
+		Job job = new Job(conf, "wordcount");
+		job.setJarByClass(DataPreprocessor.class);
+		
+		Path output1 = new Path(args[1]);
+		output1.getFileSystem(conf).delete(output1, true);
+		
+		job.setOutputKeyClass(LongWritable.class);
+		job.setOutputValueClass(Text.class);
+		    
+		job.setMapperClass(Map.class);
+		job.setReducerClass(Reduce.class);
+		    
+		job.setInputFormatClass(PatternInputFormat.class);
+		//job.setInputFormatClass(TextInputFormat.class);
+		job.setOutputFormatClass(CustomOutputFormat.class);
+		    
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		
+		job.waitForCompletion(true);
+		//System.out.println(total);
+	}
+        
+}

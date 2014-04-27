@@ -1,0 +1,32 @@
+import cart.CartesianProductTest;
+import crr.DataPreprocessor;
+import nwa.SequenceAlignment;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		long start = System.currentTimeMillis();
+		
+		String crrIn = args[0];
+		String crrOut = "";
+		
+		String cartIn = "";
+		String cartOut = "";
+		
+		String nwaIn = "";
+		String nwaOut = "";
+		
+		DataPreprocessor dp = new DataPreprocessor(crrIn, crrOut);
+		
+		
+		
+		long finish = System.currentTimeMillis();
+		System.out.println("Time in ms: " + (finish - start));
+		
+
+	}
+
+}

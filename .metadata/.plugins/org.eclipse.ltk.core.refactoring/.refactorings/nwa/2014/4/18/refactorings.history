@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements(s) to &apos;phylogeny/src/nwa&apos;&#x0A;- Original project: &apos;nwa&apos;&#x0A;- Destination element: &apos;phylogeny/src/nwa&apos;&#x0A;- Original elements:&#x0A;     NeedlemanWunsch.java&#x0A;     Reduce.java&#x0A;     Map.java&#x0A;     SequenceAlignment.java" description="Copy compilation units" destination="/src&lt;nwa" element1="/src&lt;{NeedlemanWunsch.java" element2="/src&lt;{Reduce.java" element3="/src&lt;{Map.java" element4="/src&lt;{SequenceAlignment.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="/src&lt;{NeedlemanWunsch.java&#x09;true&#x09;false&#x0A;/src&lt;{Map.java&#x09;true&#x09;false&#x0A;/src&lt;{Reduce.java&#x09;true&#x09;false&#x0A;/src&lt;{SequenceAlignment.java&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1398601162914" units="4" version="1.0"/>
+</session>
