@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="cart.CartesianProductTest"/>
+<fullyQualifiedTypeName name="crr.DataPreprocessor"/>
+<fullyQualifiedTypeName name="nwa.SequenceAlignment"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.fs.FileSystem"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.fs.FileUtil"/>
+</qualifiedTypeNameHistroy>

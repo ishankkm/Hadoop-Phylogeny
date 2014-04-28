@@ -1,0 +1,5 @@
+package upgma;
+
+public class ProduceTree {
+	private Node[] sequences = null;		
+}

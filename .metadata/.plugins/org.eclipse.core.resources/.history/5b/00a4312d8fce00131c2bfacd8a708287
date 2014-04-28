@@ -1,0 +1,5 @@
+package upgma;
+
+public class DistanceMatrix {
+	private float distanceMatrix[][] = null;
+}

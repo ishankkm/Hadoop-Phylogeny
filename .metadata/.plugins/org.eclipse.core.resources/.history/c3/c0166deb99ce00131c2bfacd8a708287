@@ -1,0 +1,46 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Main {
+	
+	public static void main(String args[]){
+		
+		ArrayList<String> stringList = new ArrayList<String>();
+		BufferedReader br = null;
+		String arr[];
+		
+		 
+		try{
+ 
+			String sCurrentLine;
+ 
+			br = new BufferedReader(new FileReader("/home/hduser/tmp/tmp/merge.txt"));
+ 
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+				arr = sCurrentLine.split("\t");
+				
+				if(!stringList.contains(arr[0])) {
+					
+					System.out.println(arr[0]);
+					stringList.add(sCurrentLine);
+				}
+				//System.out.println(sCurrentLine);
+			}
+ 
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+}
