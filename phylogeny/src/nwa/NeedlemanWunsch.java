@@ -5,11 +5,12 @@ class NeedlemanWunsch {
 	char mSeqA[];
 	char mSeqB[];
 	int mD[][];
-	int mScore;
+	double mScore;
 	String mAlignmentSeqA = "";
 	String mAlignmentSeqB = "";
 
 	NeedlemanWunsch(String seqA, String seqB) {
+				
 		mSeqA = seqA.toCharArray();
 		mSeqB = seqB.toCharArray();
 		
@@ -47,7 +48,13 @@ class NeedlemanWunsch {
 	
 		int i = mSeqA.length;
 		int j = mSeqB.length;
-		mScore = mD[i][j];
+		mScore = 0;
+		
+//		if(mSeqA.equals(mSeqB)){
+//
+//	    	System.out.println(mScore);
+//			return;
+//		}
 		
 		while (i > 0 && j > 0) {    
 		                    
@@ -55,22 +62,28 @@ class NeedlemanWunsch {
 				mAlignmentSeqA += mSeqA[i-1];
 				mAlignmentSeqB += mSeqB[j-1];
 				i--;
-				j--;                            
+				j--;  
+				mScore +=2;
 				continue;
 			} else if (mD[i][j] == mD[i][j-1] - 2) {
 				mAlignmentSeqA += "-";
 				mAlignmentSeqB += mSeqB[j-1];
 				j--;
+				mScore -=1;
 				continue;
 			} else {
 				mAlignmentSeqA += mSeqA[i-1];
 				mAlignmentSeqB += "-";
 				i--;
+				mScore -=1;
 				continue;
 			}
 		}
 		mAlignmentSeqA = new StringBuffer(mAlignmentSeqA).reverse().toString();
 		mAlignmentSeqB = new StringBuffer(mAlignmentSeqB).reverse().toString();
+		
+
+		mScore = mScore/(mSeqA.length+mSeqB.length) ;
 	}
 
 	private int weight(int i, int j) {
@@ -94,13 +107,13 @@ class NeedlemanWunsch {
 		System.out.println();
 	}
 
-	int printScoreAndAlignments() {
+	double printScoreAndAlignments() {
 	
 //		System.out.println("Score: " + mScore);
 //		System.out.println("Sequence A: " + mAlignmentSeqA);
 //		System.out.println("Sequence B: " + mAlignmentSeqB);
 //		System.out.println();
-		
+
 		return mScore;
 	}
         

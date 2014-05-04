@@ -4,9 +4,9 @@ public class Node {
 	private String nameNode = null;
 	private Node nodeLeft = null;
 	private Node nodeRight = null;
-	private float distance = 0;
+	private double distance = 0;
 	
-	public Node(Node nodeLeft, Node nodeRight, float distance){
+	public Node(Node nodeLeft, Node nodeRight, double distance){
 		this.nodeLeft = nodeLeft;
 		this.nodeRight = nodeRight;
 		this.distance = distance;
@@ -36,10 +36,10 @@ public class Node {
 	public void setNodeRight(Node nodeRight) {
 		this.nodeRight = nodeRight;
 	}
-	public float getDistance() {
+	public double getDistance() {
 		return distance;
 	}
-	public void setDistance(float distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}	
 }

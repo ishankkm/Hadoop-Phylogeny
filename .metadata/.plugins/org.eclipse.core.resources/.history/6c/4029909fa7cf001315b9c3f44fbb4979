@@ -1,0 +1,88 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import upgma.MatrixAction;
+import upgma.Node;
+import upgma.Point;
+import upgma.UPGMA;
+
+public class Main {
+	
+	public static void main(String args[]){
+		
+		ArrayList<String> seqList = new ArrayList<String>();
+		ArrayList<Double> valueList = new ArrayList<Double>();
+		
+		//double matrix[][];
+		BufferedReader br = null;
+		String arr[];	
+		 
+		try{
+ 
+			String sCurrentLine;
+ 
+			br = new BufferedReader(new FileReader("/home/hduser/tmp/tmp/merge.txt"));
+ 
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+				arr = sCurrentLine.split("\t");
+				valueList.add(Double.parseDouble(arr[2]));
+				
+				if(!seqList.contains(arr[0])) {
+					
+					System.out.println(arr[0]);
+					seqList.add(arr[0]);
+				}
+				//System.out.println(sCurrentLine);
+			}
+			double matrix[][] = new double[seqList.size()][seqList.size()];
+			
+			for (int i = 0; i < seqList.size(); i++) {
+				for (int j = 0; j < seqList.size(); j++) {
+					matrix[i][j] = valueList.get(i+j);
+					//System.out.print(" " + matrix[i][j]);
+				}
+				//System.out.println();
+			}
+			
+			UPGMA upgma = new UPGMA();
+			
+			Node[] nodeList = new Node[5];
+			String[] nodeString = {"A", "B", "C", "D", "E"};
+			/seqList.
+			for (int i = 0; i < nodeList.length; i++) {
+				nodeList[i] = new Node(nodeString[i]);
+			}
+			
+			while(!upgma.checkMatrixToTerminateIterate(matrix)){
+				
+				Point point = MatrixAction.findPointMinValueInMatrix(matrix);
+				
+				nodeList = upgma.clusterTwoNode(nodeList, matrix[point.getRow()][point.getCol()], point.getRow(), point.getCol());
+				matrix = upgma.clusterTwoMatrix(matrix, point.getRow(), point.getCol());
+//				for (int i = 0; i < matrix.length; i++) {
+//					for (int j = 0; j < matrix.length; j++) {
+//						System.out.print(" " + matrix[i][j]);
+//					}
+//					System.out.println();
+//				}
+				for(int i=0;i<nodeList.length;i++)
+					System.out.println(nodeList[i].getNameNode());
+			}
+ 
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+}

@@ -1,24 +1,19 @@
 package upgma;
 
-
 public class UPGMA {
 	
-	public void action(){
-		
-	}
-	
-	public boolean checkMatrixToTerminateIterate(float[][] matrixValue){		
+	public boolean checkMatrixToTerminateIterate(double[][] matrixValue){		
 		if(matrixValue.length == 1){
 			return true;
 		}
 		return false;
 	}
 	
-	public float[][] clusterTwoMatrix(float[][] oldMatrix, int firstNode, int secondNode){
-		float[][] newMatrix = null;
+	public double[][] clusterTwoMatrix(double[][] oldMatrix, int firstNode, int secondNode){
+		double[][] newMatrix = null;
 		
 		int numOfNode = oldMatrix.length;
-		float[][] addNodeClusterMatrix = new float[numOfNode + 1][numOfNode + 1];
+		double[][] addNodeClusterMatrix = new double[numOfNode + 1][numOfNode + 1];
 		for (int i = 0; i < addNodeClusterMatrix.length; i++) {
 			if(i != numOfNode){
 				for (int j = 0; j < addNodeClusterMatrix.length; j++) {
@@ -42,7 +37,7 @@ public class UPGMA {
 //			System.out.println();
 //		}
 		
-		newMatrix = new float[numOfNode - 1][numOfNode - 1];
+		newMatrix = new double[numOfNode - 1][numOfNode - 1];
 		int row = 0, col = 0;
 		for (int i = 0; i < addNodeClusterMatrix.length; i++) {
 			if(i != firstNode && i != secondNode){
@@ -68,7 +63,7 @@ public class UPGMA {
 		return newMatrix;
 	}
 	
-	public Node[] clusterTwoNode(Node[] sequences, float distance, int firstNode, int secondNode){
+	public Node[] clusterTwoNode(Node[] sequences, double distance, int firstNode, int secondNode){
 		Node[] newSequence = new Node[sequences.length - 1];
 		
 		Node node = new Node("("+sequences[firstNode].getNameNode()+":"+distance/2+ "," + sequences[secondNode].getNameNode()+":"+distance/2+")");
@@ -88,39 +83,45 @@ public class UPGMA {
 		return newSequence;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Node[] nodeList = new Node[5];
-		String[] nodeString = {"A", "B", "C", "D", "E"};
-		for (int i = 0; i < nodeList.length; i++) {
-			nodeList[i] = new Node(nodeString[i]);
-		}
-		
-		float[][] matrix = {{0, 10, 12, 9, 7},
-							{10, 0, 4, 4, 14},
-							{12, 4, 0, 6, 16},
-							{9, 4, 6, 0, 13}, 
-							{7, 14, 16, 13, 0}};
-				
-		UPGMA upgma = new UPGMA();
-		
-		while(!upgma.checkMatrixToTerminateIterate(matrix)){
-			
-			Point point = MatrixAction.findPointMinValueInMatrix(matrix);
-			//System.out.println(point.getValue() + " : " + point.getRow() + " : " + point.getCol());
-			nodeList = upgma.clusterTwoNode(nodeList, matrix[point.getRow()][point.getCol()], point.getRow(), point.getCol());
-			matrix = upgma.clusterTwoMatrix(matrix, point.getRow(), point.getCol());
-//			for (int i = 0; i < matrix.length; i++) {
-//				for (int j = 0; j < matrix.length; j++) {
-//					System.out.print(" " + matrix[i][j]);
-//				}
-//				System.out.println();
-//			}
-			for(int i=0;i<nodeList.length;i++)
-				System.out.println(nodeList[i].getNameNode());
-		}	
-		
-		
-	}
-	
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		Node[] nodeList = new Node[5];
+//		String[] nodeString = {"A", "B", "C", "D", "E"};
+//		for (int i = 0; i < nodeList.length; i++) {
+//			nodeList[i] = new Node(nodeString[i]);
+//		}
+//				
+////		double[][] matrix = {{0, 10, 12, 9, 7},
+////							{10, 0, 4, 4, 14},
+////							{12, 4, 0, 6, 16},
+////							{9, 4, 6, 0, 13}, 
+////							{7, 14, 16, 13, 0}};
+//		
+//		double[][] matrix = { { 350.0, 12.0, 17.0, 755.0, 17.0},
+//							 { -12.0, -17.0, -755.0, -17.0, -12.0},
+//							 { -17.0, -755.0, -17.0, -12.0, 450.0},
+//							 { -755.0, -17.0, -12.0, 450.0, 10.0},
+//							 { -17.0, -12.0, 450.0, 10.0, -765.0}};
+//				
+//		UPGMA upgma = new UPGMA();
+//		
+//		while(!upgma.checkMatrixToTerminateIterate(matrix)){
+//			
+//			Point point = MatrixAction.findPointMinValueInMatrix(matrix);
+//			
+//			nodeList = upgma.clusterTwoNode(nodeList, matrix[point.getRow()][point.getCol()], point.getRow(), point.getCol());
+//			matrix = upgma.clusterTwoMatrix(matrix, point.getRow(), point.getCol());
+////			for (int i = 0; i < matrix.length; i++) {
+////				for (int j = 0; j < matrix.length; j++) {
+////					System.out.print(" " + matrix[i][j]);
+////				}
+////				System.out.println();
+////			}
+//			for(int i=0;i<nodeList.length;i++)
+//				System.out.println(nodeList[i].getNameNode());
+//		}	
+//		
+//		
+//	}
+//	
 }

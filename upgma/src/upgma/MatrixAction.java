@@ -4,7 +4,7 @@ import upgma.Point;
 
 public class MatrixAction {
 	
-	public static Point findPointMinValueInMatrix(float[][] matrix){
+	public static Point findPointMinValueInMatrix(double[][] matrix){
 		Point point = new Point();
 		point.setValue(matrix[1][0]);
 		point.setCol(0);
@@ -25,7 +25,7 @@ public class MatrixAction {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		float[][] matrix = {{0, 1, 2, 3, 3},
+		double[][] matrix = {{0, 1, 2, 3, 3},
 							{1, 0, 2, 3, 3},
 							{2, 2, 0, 3, 3},
 							{3, 3, 3, 0, 1}, 

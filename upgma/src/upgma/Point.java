@@ -3,7 +3,7 @@ package upgma;
 public class Point {
 	private int row;
 	private int col;
-	private float value;
+	private double value;
 	
 	public Point(){
 		row = 0;
@@ -23,10 +23,10 @@ public class Point {
 	public void setCol(int col) {
 		this.col = col;
 	}
-	public float getValue() {
+	public double getValue() {
 		return value;
 	}
-	public void setValue(float value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 	

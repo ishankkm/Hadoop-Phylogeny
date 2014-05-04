@@ -55,8 +55,8 @@ public class SequenceAlignment {
 		    
 		job.waitForCompletion(true);
 		
-//		if(localFS.exists(dst))
-//			localFS.delete(dst, true);
+		if(localFS.exists(dst))
+			localFS.delete(dst, true);
 //		
 		
 		FileUtil.copyMerge(fileSystem, src, localFS, dst, false, conf, "");

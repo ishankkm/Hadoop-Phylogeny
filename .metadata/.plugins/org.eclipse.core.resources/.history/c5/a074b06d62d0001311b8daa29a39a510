@@ -1,0 +1,33 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class CallJobFromServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
+    Configuration conf = new Configuration();
+    // Replace CallJobFromServlet.class name with your servlet class
+        Job job = new Job(conf, " CallJobFromServlet.class"); 
+        job.setJarByClass(CallJobFromServlet.class);
+        job.setJobName("Job Name");
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+        job.setMapperClass(Map.class); // Replace Map.class name with your Mapper class
+        job.setNumReduceTasks(30);
+        job.setReducerClass(Reducer.class); //Replace Reduce.class name with your Reducer class
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+
+        // Job Input path
+        FileInputFormat.addInputPath(job, new  
+        Path("hdfs://localhost:54310/user/hduser/input/")); 
+        // Job Output path
+        FileOutputFormat.setOutputPath(job, new 
+        Path("hdfs://localhost:54310/user/hduser/output")); 
+
+        job.waitForCompletion(true);
+   }
+}
